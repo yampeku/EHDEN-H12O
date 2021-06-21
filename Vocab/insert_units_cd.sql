@@ -1,0 +1,1 @@
+COPY units_cd_lookup FROM '/ehdeni2b2/etl/vocab/units_cd_lookup.csv' DELIMITER ';' CSV HEADER;

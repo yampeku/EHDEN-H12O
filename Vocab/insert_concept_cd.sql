@@ -1,0 +1,1 @@
+COPY source_to_concept_map FROM '/ehdeni2b2/etl/vocab/concept_cd_lookup.csv' DELIMITER E'\t' CSV HEADER;
