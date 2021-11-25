@@ -9,7 +9,7 @@ INSERT INTO drug_exposure
     drug_exposure_end_date,
     drug_exposure_end_datetime,
     verbatim_end_date,
-    drug_type_concept_id, -- Assign concept_id 38000177 (prescription written) 
+    drug_type_concept_id, -- If unknown assign concept_id 38000177 (prescription written) 
     stop_reason,
     refills,
     quantity,
@@ -49,7 +49,7 @@ SELECT
  -- [MAPPING COMMENT] no mapping logic defined. Put NULL
     NULL AS verbatim_end_date,
 
- -- [MAPPING COMMENT] no mapping logic defined. Put NULL
+ -- [MAPPING COMMENT] When prescription then prescription written, when substance administration then inpatient administration, else prescription written
     CASE
 	WHEN observation_fact_med.modifier_cd='ES_12OCTUBRE_ADMI:prescription' THEN 38000177 --presctiption written
 	WHEN observation_fact_med.modifier_cd='ES_12OCTUBRE_ADMI:substance administration' THEN 38000180 --inpatient administration
@@ -100,6 +100,6 @@ SELECT
 
     observation_fact_med.units_cd AS dose_unit_source_value
 
---observation_fact_med is i2b2.observation_fact where concept_cd is AEMPS or ES12_OCTUBRE_MED
+--observation_fact_med is i2b2.observation_fact where concept_cd is AEMPS or ES12_OCTUBRE_MED (this query was transformed into the pivot table 'observation_fact_med')
 FROM observation_fact_med;
 ;
